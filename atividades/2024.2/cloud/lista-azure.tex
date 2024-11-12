@@ -4,7 +4,7 @@
 \usepackage{enumitem}
 \usepackage{hyperref}
 
-\title{Produtos Oferecidos pela Azure, GCP, Alibaba e suas respectivas Funcionalidades}
+\title{Produtos Oferecidos pela Azure, GCP, Alibaba Cloud e suas respectivas Funcionalidades}
 \author{Breno Fernandes - 01169313}
 \date{\today}
 
@@ -18,9 +18,9 @@
 
 \subsection*{Azure Virtual Machines (VMs)}
 As VMs na Azure são usadas para hospedar servidores virtuais com configurações flexíveis, permitindo ao usuário escolher o sistema operacional, a CPU, a memória e o armazenamento.
+
+\textbf{Tipos de VMs:}Azure oferece vários tipos de VMs para diferentes cargas de trabalho:
 \begin{itemize}[left=0pt]
-  \item \textbf{Tipos de VMs:}
-Azure oferece vários tipos de VMs para diferentes cargas de trabalho:
 
 \item \textbf{Série B (Burstable)}: Projetada para cargas de trabalho intermitentes e de baixo custo.
 \item \textbf{Série D (General Purpose)}: Equilibrada em CPU e memória, ideal para aplicativos de negócios.
@@ -29,12 +29,62 @@ Azure oferece vários tipos de VMs para diferentes cargas de trabalho:
   
 \end{itemize}
 
+\subsection*{Formas de precificação}
+
+\textbf{Pay-As-You-Go}: Pagamento por uso sem necessidade de compromissos de longo prazo. Ideal para ambientes de desenvolvimento e teste.
+\textbf{Instâncias Reservadas:} Permite um compromisso de 1 ou 3 anos, resultando em até 72\% de desconto.
+
+\subsection*{Azure SQL Database}
+
+O Azure SQL Database é um serviço de banco de dados relacional gerenciado com compatibilidade SQL Server. Ele oferece diversas opções para escalabilidade e com suporte para \textit{HA} e  recuperação de desastres.
+
+\subsection*{Forma de precificação}
+
+\begin{itemize}
+
+  \item Database Transation Unit - Ideal para cargas de trabalho com pequeno núbmero de transações.
+  \item Baseado em em núbmero de Núcleos - Permite escalar o número de vCpu de forma independente.
+  
+\end{itemize}
+
 \break
 
 \section*{GCP}
 
+\subsection*{Google Compute Engine (VMs)}
+
+O Google Compute Engine fornece máquinas virtuais personalizáveis para hospedagem de aplicações com serviços de alta flexibilidade e escalabilidade.
+
+\subsection*{Tipos de máquinas virtuais}
+\begin{itemize}
+  \item{E2} - Máquinas de usuo geral com equilíbrio entre custo e desempenho. 
+  \item{N2} - Oferecem mais capacidade de CPU e memória recomendadas para cargas de trabalho de negócios mais exigentes.
+  \item{M2} - Máquinas com alta quantidade de memória, adequada para grandes bancos de dados. 
+  \item{A2} - Máquinas equipadas com GPUs para cargas envolvendo inteligência artificial.
+
+\end{itemize}
+
+\subsection*{Forma de precificação}
+
+\begin{itemize}
+  \item Commited use discounts - Reduz o cousto ao se comprometer com o uso durante um tempo determinado.
+  \item Preemptible - Para cargas de trabalho tolerantes a falhas o custo é reduzido.
+  \end{itemize}
+
+\subsection*{Google Cloud Storage}
+O Google Cloud Storage é oum serviço de armazenamento de objetos que oferece escalabilidade, segurança e alta disponibilidade para armazenar grandes volumes de dados, ele é ideal para backup, arquivamento e \textit{CDN}.
+\subsection*{Classes de armazenamento}
+O \textit{GCS} oferece quatro classes de armazenamento, com diferentes preços e níveis de disponibilidade de acesso aos dados:
+\begin{itemize}
+  \item\textbf{Standard} - Alta disponibilidade, ideal para acessar dados frequentemente.
+  \item\textbf{Nearline} - Otimizado para dados que são acessados menos de uma vez por mês. 
+  \item\textbf{Coldline} - Adequado para dados que não são acessados frequentemente, custando menos por GB.
+  \item\textbf{Archive} - Para dados de longo prazo e raramente acessados, com custo reduzido.
+\end{itemize}
 \break
 
 \section*{Alibaba Cloud}
+
+
 
 \end{document}
