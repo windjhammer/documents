@@ -11,6 +11,11 @@
 \usepackage{booktabs}
 \usepackage{geometry}
 \usepackage{ragged2e}
+\usepackage{pgfplots}
+\usepackage{geometry}
+\pgfplotsset{compat=1.18}
+\usepgfplotslibrary{dateplot}
+
 
 \title{Sistemas elétricos de datacenters}
 \author{Breno Fernandes - 01169313}
@@ -43,25 +48,260 @@ Segundo o \textit{datasheet} com a descrição das configurações do servidor, 
     \caption{Distribuição da carga de servidores Dell R550}
 \end{table}
 
-\section*{Cálculo do Fator de Crescimento}
-
-O fator de crescimento é calculado utilizando a seguinte fórmula:
+\section*{Cálculo do fator de crescimento}
+A potência inicial do datacenter é \textbf{36.0 kW} (ano 0). Considerando um crescimento anual de \textbf{10\%} a evolução é calculada pela fórmula:
 
 \[
-  {Crescimento} = {Carga} \left(1 + \right.{taxa})^{tempo}
-$$$$
-\]
-\[
-36 \times (1 + (10/100))^5 = 57.97836
+P_{\text{final}} = P_{\text{inicial}} \times (1 + \text{taxa})^{\text{anos}}
 \]
 
-Foi considerado um crescimento de 10\% num espaço de tempo de 5 anos, portanto:
+\noindent onde:
+\begin{itemize}
+    \item \( P_{\text{inicial}} = 36.0 \, \text{kW} \)
+    \item \( \text{taxa} = 10\% = 0.10 \)
+    \item \( \text{anos} = 5 \)
+\end{itemize}
+
+\newpage
+\vspace*{-\baselineskip}
+\subsection*{Crescimento Anual}
+\begin{table}[h]
+    \centering
+    \small 
+    \setlength{\tabcolsep}{8pt} 
+    \begin{tabular}{|c|c|r|}
+        \hline
+        \textbf{Ano} & \textbf{Fator de Crescimento} & \textbf{Potência (kW)} \\
+        \hline
+        0 & \( 1.10^0 = 1.00 \) & 36.00 \\
+        \hline
+        1 & \( 1.10^1 = 1.10 \) & 36.00 \(\times\) 1.10 = 39.60 \\
+        \hline
+        2 & \( 1.10^2 = 1.21 \) & 39.60 \(\times\) 1.10 = 43.56 \\
+        \hline
+        3 & \( 1.10^3 = 1.33 \) & 43.56 \(\times\) 1.10 = 47.92 \\
+        \hline
+        4 & \( 1.10^4 = 1.46 \) & 47.92 \(\times\) 1.10 = 52.71 \\
+        \hline
+        5 & \( 1.10^5 = 1.61 \) & 52.71 \(\times\) 1.10 = \boxed{57.98} \\
+        \hline
+    \end{tabular}
+    \caption{Cálculo detalhado da potência com crescimento anual de 10\%.}
+\end{table}
+
+Após 5 anos, a potência total projetada é:
 \[
-12.0 \times 1.61051 = 19.33 \ \mathrm{kW} \ (\text{por\ rack})
+\boxed{57.98 \, \text{kW}} \quad (\text{aumento de 61\% sobre a carga inicial}).
 \]
+\section*{Cargas para Espaço de Suporte}
+\subsection*{Ajuste}
+Um aumento adicional de \textbf{15\%} é aplicado à potência total para considerar:  
+\begin{itemize}
+    \item NOC 
+    \item Entrada de serviços de telecomunicações
+    \item Armazenagem de equipamentos e suprimentos
+\end{itemize}
+
 \[
-36.0 \times 1.61051 = 57.85 \ \mathrm{ kW (total)}
+P_{\text{final\_ajustada}} = P_{\text{final}} \times (1 + 0.15)
 \]
-Dessa forma, a carga total do projeto considerando o fator de crescimento será de \textbf{57,85} kW.
+
+\subsection*{Tabela de Cálculo}
+\begin{table}[h!]
+    \centering
+    \small
+    \setlength{\tabcolsep}{8pt}
+    \begin{tabular}{|c|c|r|}
+        \hline
+        \textbf{Fator} & \textbf{Descrição} & \textbf{Potência (kW)} \\
+        \hline
+        Potência após 5 anos & Base & 57.98 \\
+        \hline
+        Aumento de 15\% & \( 57.98 \times 1.15 \) & \boxed{66.68} \\
+        \hline
+    \end{tabular}
+    \caption{Ajuste para cargas de suporte do datacenter.}
+\end{table}
+
+\subsection*{Resultado Ajustado}
+A potência total, incluindo infraestrutura de suporte, é:
+\[
+\boxed{66.68 \, \text{kW}} \quad (\text{aumento total de 85.2\% sobre a carga inicial}).
+\]
+
+\subsection*{Carga de Iluminação}
+\begin{itemize}
+    \item Densidade: \( 25 \, \text{W/m}^2 \)
+    \item Área: \( 15 \, \text{m}^2 \)
+    \item Cálculo:
+    \[
+    25 \times 15 = 375 \, \text{W} = \boxed{0.38 \, \text{kW}}
+    \]
+    \item Total parcial:
+    \[
+    66.68 + 0.38 = \boxed{67.06 \, \text{kW}}
+    \]
+\end{itemize}
+
+\subsection*{Carga do Sistema UPS (Nobreaks)}
+\begin{itemize}
+    \item Fator de bateria: \( 15\% \)
+    \item Fator de ineficiência: \( 10\% \)
+    \item Cálculo:
+    \[
+    67.06 \times (0.15 + 0.10) = 67.06 \times 0.25 = \boxed{16.77 \, \text{kW}}
+    \]
+    \item Total parcial:
+    \[
+    67.06 + 16.77 = \boxed{83.83 \, \text{kW}}
+    \]
+\end{itemize}
+
+\subsection*{Carga Mecânica (Climatização)}
+\begin{itemize}
+    \item Fator de carga: \( 65\% \)
+    \item Cálculo:
+    \[
+    83.83 \times 0.65 = \boxed{54.49 \, \text{kW}}
+    \]
+    \item Total parcial:
+    \[
+    83.83 + 54.49 = \boxed{138.32 \, \text{kW}}
+    \]
+\end{itemize}
+
+\subsection*{Margem de Segurança}
+\begin{itemize}
+    \item Fator de segurança: \( 25\% \)
+    \item Cálculo:
+    \[
+    138.32 \times 0.25 = \boxed{34.58 \, \text{kW}}
+    \]
+    \item Total final:
+    \[
+    138.32 + 34.58 = \boxed{172.90 \, \text{kW}}
+    \]
+\end{itemize}
+
+\section*{Resumo das Cargas}
+\begin{table}[h!]
+    \centering
+    \small
+    \begin{tabular}{|l|c|r|}
+        \hline
+        \textbf{Componente} & \textbf{Fator} & \textbf{Potência (kW)} \\
+        \hline
+        Potência inicial do datacenter & - & 36.00 \\
+        Crescimento 5 anos & \(1.10^5\) & +21.98 \\
+        Cargas de suporte & 15\% & +8.70 \\
+        Iluminação & \(25 \, \text{W/m}^2\) & +0.38 \\
+        Sistema UPS & 25\% & +16.77 \\
+        Carga mecânica & 65\% & +54.49 \\
+        Margem de segurança & 25\% & +34.58 \\
+        \hline
+        \textbf{Total Final} & & \boxed{172.90} \\
+        \hline
+    \end{tabular}
+    \caption{Composição detalhada da carga total do datacenter}
+\end{table}
+
+\section*{Resultado Final}
+A potência total projetada, incluindo todos os fatores de carga e margens de segurança, é:
+\[
+\boxed{172.90 \, \text{kW}} \quad (\text{aumento de 380.3\% sobre a carga inicial}).
+\]
+
+\vspace{3mm}
+\noindent \textit{Observação:} O cálculo do aumento total considera a relação:
+\[
+\left(\frac{172.90}{36.0} - 1\right) \times 100 = 380.3\% 
+\]
+
+\section*{Cálculo da Corrente do Alimentador Elétrico}
+
+\subsection*{Fórmula}
+A corrente do alimentador é determinada pela potência total e tensão trifásica:
+\[
+P_{\text{total}} = U_{\text{trifásico}} \cdot I \cdot \sqrt{3} \quad \Rightarrow \quad I = \frac{P_{\text{total}}}{U_{\text{trifásico}} \cdot \sqrt{3}}
+\]
+
+\begin{itemize}
+    \item Potência total (\( P_{\text{total}} \)): \( 172,90 \, \text{kW} = 172.900 \, \text{W} \)
+    \item Tensão trifásica padrão (\( U_{\text{trifásico}} \)): \( 380 \, \text{V} \)
+    \item \( \sqrt{3} \approx 1,732 \)
+\end{itemize}
+
+\[
+I = \frac{172.900}{380 \times 1,732} = \frac{172.900}{658,16} \approx \boxed{262,7 \, \text{A}}
+\]
+
+\subsection*{Tabela}
+\begin{table}[h!]
+    \centering
+    \small
+    \begin{tabular}{|l|c|c|}
+        \hline
+        \textbf{Parâmetro} & \textbf{Símbolo} & \textbf{Valor} \\
+        \hline
+        Potência total & \( P_{\text{total}} \) & 172,90 kW \\
+        Tensão trifásica & \( U_{\text{trifásico}} \) & 380 V \\
+        Fator \( \sqrt{3} \) & - & 1,732 \\
+        Corrente calculada & \( I \) & \boxed{262,7 \, \text{A}} \\
+        \hline
+    \end{tabular}
+    \caption{Parâmetros para cálculo da corrente do alimentador.}
+\end{table}
+
+\section*{Evolução da Potência}
+\begin{figure}[h!]
+    \centering
+    \begin{tikzpicture}
+        \begin{axis}[
+            width=0.9\textwidth,
+            height=0.7\textwidth,
+            xlabel={Etapas},
+            ylabel={Potência (kW)},
+            symbolic x coords={Inicial, Crescimento, Suporte, Iluminação, UPS, Mecânica, Margem},
+            xtick=data,
+            x tick label style={
+                rotate=45,
+                anchor=east, 
+                font=\small,
+                align=center 
+            },
+            ymin=0,
+            ymax=200,
+            nodes near coords,
+            nodes near coords style={
+                font=\tiny,
+                rotate=45,
+                anchor=west
+            },
+            enlarge x limits=0.2,  
+            grid=both,
+            major grid style={line width=.2pt,draw=gray!50},
+            ]
+            \addplot[blue, thick, mark=*, mark options={fill=white}] coordinates {
+                (Inicial, 36.00)
+                (Crescimento, 57.98)
+                (Suporte, 66.68)
+                (Iluminação, 67.06)
+                (UPS, 83.83)
+                (Mecânica, 138.32)
+                (Margem, 172.90)
+            };
+        \end{axis}
+    \end{tikzpicture}
+    \caption{Aumento da potência total após cada componente adicionado.}
+\end{figure}
+
+\section*{Considerações Finais}
+\begin{itemize}
+    \item \textbf{Aumento total:} A potência final de \boxed{172,90 \, \text{kW}} representa um aumento de \textbf{380,3\%} em relação à carga inicial (36 kW).
+    \item \textbf{Componente crítico:} A carga mecânica climatização foi o maior incremento individual (+54,49 kW), reforçando a necessidade de planejamento robusto para sistemas dessa natureza.
+    \item \textbf{Margem de segurança:} Os 25\% adicionais garantem flexibilidade para expansões não previstas ou picos de demanda.
+    \item \textbf{Corrente do alimentador:} Para a potência final, a corrente estimada é de \boxed{262,7 \, \text{A}} (em 380 V trifásico), exigindo cabos de qualidade e dimensão adequada.
+\end{itemize}
+
 
 \end{document}
