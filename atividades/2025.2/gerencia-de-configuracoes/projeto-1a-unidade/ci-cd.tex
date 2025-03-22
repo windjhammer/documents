@@ -82,22 +82,49 @@ Diferentes ferramentas desempenham papéis essenciais tanto na CI quanto na CD. 
 
 Enquanto a \textbf{CI} garante que o código esteja sempre testado e pronto para uso, a \textbf{CD} foca em disponibilizar esse código para produção de forma automatizada e confiável. Juntas, essas práticas aumentam a eficiência do desenvolvimento de software e reduzem o risco de falhas em produção.  
 
-\subsection*{2. Análise de Pipeline CI/CD}  
+\subsection*{Análise de Pipeline CI/CD}  
 O pipeline de \textbf{CI/CD} apresentado é composto por três etapas principais: \textit{build, test e deploy}.  
 
 A primeira etapa, \textit{build}, é responsável pela compilação do código. Durante essa fase, o comando \inlinecode{java}{mvn package} é executado, indicando o uso do Maven para empacotamento do projeto, gerando um arquivo \inlinecode{java}{.jar}.  
 
-A segunda etapa, **test**, executa os testes automatizados do projeto. O comando `mvn test` roda os testes definidos na aplicação para garantir que o código funciona corretamente antes de avançar para as próximas fases. Caso algum teste falhe, o pipeline é interrompido e o código não segue para as próximas etapas.  
+A segunda etapa, \textit{test}, executa os testes automatizados do projeto. O comando \inlinecode{java}{mvn test} roda os testes definidos na aplicação para garantir que o código funciona corretamente antes de avançar para as próximas fases. Caso algum teste falhe, o pipeline é interrompido e o código não segue para as próximas etapas.  
 
-A terceira etapa, **deploy**, realiza a implantação do artefato gerado na fase de build. O comando `scp target/app.jar servidor:/app` copia o arquivo `.jar` para um servidor remoto, permitindo que ele seja executado em produção.  
+A terceira etapa, \textit{deploy}, realiza a implantação do arquivo gerado na fase de \textit{build}. O comando \inlinecode{java}{scp target/app.jar servidor:/app} copia o arquivo \inlinecode{java}{.jar} para um servidor remoto, permitindo que ele seja executado em produção.  
 
-O deploy ocorre **apenas na branch `main`**, conforme definido pela diretiva `only: - main`. Isso significa que mudanças em branches de desenvolvimento ou feature branches não serão implantadas automaticamente. Esse comportamento evita que versões instáveis ou em desenvolvimento sejam enviadas para produção, garantindo que apenas código revisado e aprovado na `main` seja disponibilizado para os usuários.  
+O deploy ocorre \textbf{apenas na branch} \textit{'main'}, conforme definido pelo comando declarativo \inlinecode{java}{only: - main}. Isso significa que mudanças em \textit{branches} de desenvolvimento ou \textit{branches} de features não serão implantadas automaticamente. Esse comportamento evita que versões instáveis ou em desenvolvimento sejam enviadas para produção, garantindo que apenas código revisado e aprovado na \textit{'main'} seja disponibilizado para os usuários.  
+
+\subsection*{Estudos de Caso (Análise de Problemas)}  
+
+\subsubsection*{Caso 1: Problemas de compatibilidade entre versões}  
+A equipe enfrenta dificuldades devido à integração manual do código, o que frequentemente causa problemas de compatibilidade entre versões. Esse cenário pode ser resolvido com a implementação do CI.  
+
+A CI automatiza o processo de integração de código, garantindo que todas as alterações feitas pelos desenvolvedores sejam testadas continuamente antes de serem mescladas ao repositório principal. Isso pode ser feito utilizando \textit{pipelines} automatizados que executam testes unitários e de integração sempre que um novo \textit{commit} é realizado.  
+
+A solução mais adequada é configurar uma pipeline de CI utilizando, por exemplo, o GitHub Actions. Esse pipeline deveria seguir as seguintes etapas:  \newline
+1. \textbf{Build automático} – Compilar o código a cada commit para identificar problemas estruturais.  \newline
+2. \textbf{Execução de testes automatizados} – Testes unitários e de integração garantem que mudanças não causem regressões.  \newline
+3. \textbf{Relatórios de qualidade} – Ferramentas como SonarQube e Prometheus podem ser integradas para atestar a qualidade do código e verificar se há problemas na sua execução.  \newline
+4. \textbf{Feedback rápido} – Se um erro for detectado, os desenvolvedores recebem notificações imediatas para corrigir antes da fusão com a branch principal.  \newline
+
+Utilizando essa abordagem, problemas de compatibilidade são identificados com rapidez, reduzindo retrabalho e garantindo que o código esteja sempre em um estado funcional antes de ser integrado ao sistema principal.  
+
+\subsubsection*{Caso 2: Problemas com deploy manual e falhas frequentes}  
+A startup do exemplo enfrenta dificuldades no processo de deploy manual, pois esse método é defasado e não garante um funcionamento uniforme do processo de deploy. Utilizando CD esse problema pode ser resolvido automatizando a preparação e implantação das atualizações, garantindo um fluxo mais confiável e eficiente.  
+
+Com o CD, todas as mudanças que passam pela \textbf{Integração Contínua} são automaticamente preparadas para implantação, eliminando o risco de erros humanos no deploy. Para essa startup, uma pipeline automatizada poderia seguir as seguintes etapas:  
+
+1. \textbf{Build e Testes Automatizados} – A cada novo \textit{commit}, o código é compilado e testado para garantir que está funcionando corretamente.  
+2. \textbf{Criação dos pacotes} – O software é empacotado (por exemplo, um container \textit{Docker}) para garantir consistência entre os ambientes.  
+3. \textbf{Implantação Automatizada} – O código é enviado para os servidores de produção automaticamente, eliminando a necessidade de deploy manual. Como por exemplo utilizando o \textbf{GitLab CI/CD}.  
+4. \textbf{Monitoramento e Rollback} – Após o deploy, ferramentas como \textit{Zabbix, Datadog, Grafana, Graylog e ELK Stack} podem monitorar o sistema em tempo real. Caso algum problema seja detectado, um rollback automático pode ser acionado.  
+
+Com a \textbf{Entrega Contínua}, a startup pode manter seu ciclo de lançamentos semanais sem instabilidades, garantindo que novas funcionalidades sejam entregues rapidamente e com menos chanbce de conter erros.  
 
 
 \newpage{}
 
 \section*{Conclusão}
-\lipsum[4] % Aqui você coloca a conclusão com a experiência adquirida.
+\lipsum[4] 
 
 \end{document}
 
