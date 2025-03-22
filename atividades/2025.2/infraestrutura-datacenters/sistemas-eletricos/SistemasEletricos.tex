@@ -1,5 +1,3 @@
-
-
 \documentclass[12pt]{article}
 \usepackage[utf8]{inputenc}
 \usepackage[brazil]{babel}
@@ -8,6 +6,11 @@
 \usepackage[a4paper, margin=1in]{geometry}
 \usepackage{graphicx}
 \usepackage{hyperref}
+\usepackage{amsmath}
+\usepackage{tabularx}
+\usepackage{booktabs}
+\usepackage{geometry}
+\usepackage{ragged2e}
 
 \title{Sistemas elétricos de datacenters}
 \author{Breno Fernandes - 01169313}
@@ -16,5 +19,49 @@
 \begin{document}
 
 \maketitle
+
+\section*{Configuração do Datacenter}
+O servidor escolhido é um \textbf{Dell PowerEdge R550}. Segundo o documento, serão utilizados 45 servidores distribuídos em 3 racs, portanto, cada rack comportará 15 servidores.
+Segundo o \textit{datasheet} com a descrição das configurações do servidor, existem versões com fonte de 600w e 800w, optei por seguir com a configuração de 800w para a realização dos cálculos.
+
+\renewcommand{\arraystretch}{1.3}
+\begin{table}[h]
+    \centering
+    \begin{tabular}{|c|l|c|}
+        \hline
+        \textbf{Equipamento} & \textbf{Descrição} & \textbf{Carga (kW)} \\
+        \hline
+        RACK01 & Rack 42U - 15x Servidores Dell R550 & 12,0 \\
+        \hline
+        RACK02 & Rack 42U - 15x Servidores Dell R550 & 12,0 \\
+        \hline
+        RACK03 & Rack 42U - 15x Servidores Dell R550 & 12,0 \\
+        \hline
+        \multicolumn{2}{|l|}{\textbf{Carga total do datacenter}} & \textbf{36,0} \\
+        \hline
+    \end{tabular}
+    \caption{Distribuição da carga de servidores Dell R550}
+\end{table}
+
+\section*{Cálculo do Fator de Crescimento}
+
+O fator de crescimento é calculado utilizando a seguinte fórmula:
+
+\[
+  {Crescimento} = {Carga} \left(1 + \right.{taxa})^{tempo}
+$$$$
+\]
+\[
+36 \times (1 + (10/100))^5 = 57.97836
+\]
+
+Foi considerado um crescimento de 10\% num espaço de tempo de 5 anos, portanto:
+\[
+12.0 \times 1.61051 = 19.33 \ \mathrm{kW} \ (\text{por\ rack})
+\]
+\[
+36.0 \times 1.61051 = 57.85 \ \mathrm{ kW (total)}
+\]
+Dessa forma, a carga total do projeto considerando o fator de crescimento será de \textbf{57,85} kW.
 
 \end{document}
