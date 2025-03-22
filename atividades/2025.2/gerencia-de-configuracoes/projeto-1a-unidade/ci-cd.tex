@@ -1,0 +1,103 @@
+\documentclass[a4paper,12pt]{article}
+\usepackage[utf8]{inputenc}
+\usepackage{graphicx}
+\usepackage{fancyhdr}
+\usepackage{lipsum}
+\usepackage{listings}
+\usepackage{color}
+\definecolor{lightgray}{gray}{0.9}
+
+\lstset{
+    showstringspaces=false,
+    basicstyle=\ttfamily,
+    keywordstyle=\color{blue},
+    commentstyle=\color[grey]{0.6},
+    stringstyle=\color[RGB]{255,150,75}
+}
+
+\newcommand{\inlinecode}[2]{\colorbox{lightgray}{\lstinline[language=#1]$#2$}}
+
+\begin{document}
+\begin{titlepage}
+    \centering
+    \includegraphics[width=0.4\textwidth]{./media/uninassau-logo.png}\par\vspace{1cm}
+    
+    {\huge\bfseries Trabalho sobre Integração Contínua (CI) e Entrega Contínua (CD)\par}\vspace{1cm}
+    
+    \textbf{Disciplina:} Gerência de Configurações e Dependências\par
+    \textbf{Professor:} Silvio Caetano\par
+    \textbf{Alunos:} Breno Fernandes (01169313)\par
+    
+    \vfill
+    
+    {\large Olinda, Março de 2024\par}
+\end{titlepage}
+
+\pagestyle{fancy}
+\fancyhf{}
+\fancyfoot[L]{Uninassau}
+\fancyhead[C]{Integração Contínua e Entrega Contínua \textbf{CI/CD}}
+\fancyfoot[R]{\thepage}
+
+\newpage
+
+\section*{Introdução}
+A Integração Contínua e Entrega Contínua são práticas fundamentais no desenvolvimento de software moderno. O úso dessas práticas visa garantir que mudanças no código sejam testadas, criadas, integradas e entregues de maneira automatizada, reduzindo erros e aumentando a confiabilidade e eficiência do sistema.  
+
+Este trabalho tem como objetivo explorar os conceitos de CI/CD, apresentando suas diferenças, evidenciando as principais ferramentas, mostrando a importância do processo de automatizar o desenvolvimento de software e também evidenciando os desafios e boas práticas para sua implementação. Além disso, serão respondidas questões propostas tema demonstrando sua aplicação prática em um ambiente real.
+\newpage{}
+\section*{Desenvolvimento}
+
+\subsection*{Diferença entre CI e CD}
+O CI/CD são práticas essenciais no ciclo de vida do desenvolvimento de software, mas possuem propósitos distintos dentro do processo de automação.  
+
+A \textbf{Integração Contínua } refere-se ao processo de integrar continuamente o código desenvolvido por diferentes membros da equipe em um repositório central. Cada nova alteração no código passa por testes automatizados para garantir que não haja erros antes de ser realizado o \textit{merge}. O objetivo principal do CI é detectar e corrigir problemas rapidamente, garantindo que o software esteja sempre em um estado funcional.  
+
+Já a \textbf{Entrega Contínua} ocorre após a CI e se concentra em garantir que o software esteja sempre pronto para implantação. Isso significa que, após a integração do código e a execução dos testes, o sistema é preparado para ser entregue automaticamente em um ambiente de produção ou homologação. A CD reduz o tempo entre o desenvolvimento e a entrega ao usuário final, garantindo que novas funcionalidades sejam disponibilizadas de maneira rápida e confiável.  
+
+\subsection*{Exemplos práticos}  
+Um exemplo prático de \textbf{CI} seria um time de desenvolvedores trabalhando em um projeto compartilhado no GitHub. A cada novo commit feito no repositório, um pipeline do GitHub Actions ou Jenkins é acionado para rodar testes automatizados e verificar a qualidade do código. Se os testes passarem, o código pode ser integrado automaticamente ao branch principal.  
+
+Por outro lado, um exemplo de \textbf{CD} seria uma aplicação hospedada na AWS que utiliza um pipeline do GitLab CI/CD para automatizar a implantação. Assim que o código passa nos testes da CI, ele é automaticamente empacotado e enviado para um ambiente de produção usando ferramentas como \textit{Docker} e \textit{Kubernetes}, permitindo que novas versões do software sejam disponibilizadas para os usuários sem intervenção manual.  
+
+Ferramentas como \textit{Docker} e \textit{Kubernetes} desempenham um papel fundamental na fase de \textbf{CD} da esteira de \textbf{CI/CD}. O \textit{Docker} é utilizado para empacotar aplicações e suas dependências em contêineres, garantindo que o software funcione da mesma maneira em qualquer ambiente, seja no computador do desenvolvedor ou em produção. Já o \textit{Kubernetes} atua na fase de implantação e gerenciamento, sendo responsável por orquestrar os contêineres, garantindo escalabilidade, alta disponibilidade e automação no deploy das aplicações.  
+
+Enquanto a CI foca na validação e testes de código, e usa ferramentas como \textit{Jenkins, CircleCI e Teamcity}, Docker e Kubernetes entram na fase de CD, facilitando a entrega automatizada e eficiente do software em diferentes ambientes de execução.
+\subsection*{Ferramentas utilizadas}
+Diferentes ferramentas desempenham papéis essenciais tanto na CI quanto na CD. Algumas das mais comuns são:  
+
+- \textbf{Para CI:} \newline{} 
+- \textit{Jenkins} – Uma das ferramentas mais populares de automação de integração, altamente configurável.  \newline{}
+  -  \textit{GitHub Actions} – Integrado ao GitHub, permite definir workflows automatizados para testes.  \newline{}
+  -  \textit{GitLab CI/CD} – Plataforma integrada ao GitLab para rodar testes e validar código automaticamente.  \newline{}
+  -  \textit{CircleCI} – Focado em pipelines de CI rápidos e eficientes.  \newline{}
+  -  \textit{Travis CI}– Comum em projetos open source, permite testar código em diferentes ambientes.  \newline{}
+
+  - \textbf{Para CD:} \newline
+- \textit{ArgoCD} – Gerencia deploys contínuos em ambientes Kubernetes. \newline 
+- \textit{Spinnake} – Plataforma de entrega contínua usada por empresas como Netflix e Google. \newline
+- \textit{AWS CodeDeploy} – Automação de implantação na infraestrutura da AWS. \newline
+- \textit{Azure DevOps} – Ferramenta integrada para CI/CD em ambientes Microsoft. \newline
+- \textit{Google Cloud Build} – Automatiza a entrega contínua em ambientes Google Cloud. \newline
+
+Enquanto a \textbf{CI} garante que o código esteja sempre testado e pronto para uso, a \textbf{CD} foca em disponibilizar esse código para produção de forma automatizada e confiável. Juntas, essas práticas aumentam a eficiência do desenvolvimento de software e reduzem o risco de falhas em produção.  
+
+\subsection*{2. Análise de Pipeline CI/CD}  
+O pipeline de \textbf{CI/CD} apresentado é composto por três etapas principais: \textit{build, test e deploy}.  
+
+A primeira etapa, \textit{build}, é responsável pela compilação do código. Durante essa fase, o comando \inlinecode{java}{mvn package} é executado, indicando o uso do Maven para empacotamento do projeto, gerando um arquivo \inlinecode{java}{.jar}.  
+
+A segunda etapa, **test**, executa os testes automatizados do projeto. O comando `mvn test` roda os testes definidos na aplicação para garantir que o código funciona corretamente antes de avançar para as próximas fases. Caso algum teste falhe, o pipeline é interrompido e o código não segue para as próximas etapas.  
+
+A terceira etapa, **deploy**, realiza a implantação do artefato gerado na fase de build. O comando `scp target/app.jar servidor:/app` copia o arquivo `.jar` para um servidor remoto, permitindo que ele seja executado em produção.  
+
+O deploy ocorre **apenas na branch `main`**, conforme definido pela diretiva `only: - main`. Isso significa que mudanças em branches de desenvolvimento ou feature branches não serão implantadas automaticamente. Esse comportamento evita que versões instáveis ou em desenvolvimento sejam enviadas para produção, garantindo que apenas código revisado e aprovado na `main` seja disponibilizado para os usuários.  
+
+
+\newpage{}
+
+\section*{Conclusão}
+\lipsum[4] % Aqui você coloca a conclusão com a experiência adquirida.
+
+\end{document}
+
