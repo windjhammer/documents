@@ -1,0 +1,103 @@
+\documentclass[a4paper]{article}
+\usepackage{amsmath}
+\usepackage[brazil]{babel}
+\usepackage{datetime2}
+\usepackage{pgfplots}
+\usepackage{pgfplotstable}
+\usepackage{lscape}
+\usepackage{geometry}
+\pgfplotsset{compat=1.18}
+
+\begin{document}
+
+\title{Cálculo de Disponibilidade do Sistema}
+\author{Breno Fernandes - 01169313}
+\date{\today}
+\maketitle
+
+\section{Resultados}
+
+Com base no gráfico, temos os seguintes cálculos:
+
+\begin{itemize}
+    \item \textbf{MTBF}: 4 dias
+    \item \textbf{MTTR}: 3 dias
+    \item \textbf{Disponibilidade do sistema}: 
+    \begin{align*}
+        D &= \frac{MTBF}{MTBF + MTTR} \times 100\\
+        &= \frac{4}{4 + 3} \times 100\\
+        &= \frac{4}{7} \times 100\\
+        &\approx 57,14\%
+    \end{align*}
+\end{itemize}
+
+Portanto, a disponibilidade do sistema nesta semana foi de aproximadamente \textbf{57,14\%}.
+
+\pgfplotsset{compat=1.18}
+
+\begin{tikzpicture}
+\begin{axis}[
+    width=14cm,
+    height=6cm,
+    xlabel=Dias,
+    ylabel=Disponibilidade,
+    xmin=1,
+    xmax=7,
+    ymin=-0.2,
+    ymax=1.2,
+    xtick={1,2,...,7},
+    xticklabels={Dia 1, Dia 2, Dia 3, Dia 4, Dia 5, Dia 6, Dia 7},
+    ytick={0,1},
+    yticklabels={Indisponível, Disponível},
+    grid=both,
+    grid style={dashed,gray!30},
+    title={Disponibilidade do Host - Últimos 7 Dias},
+    axis lines=left,
+    enlargelimits=false
+]
+
+\draw[blue, thick] (1,1) -- (5.5,1);    
+\draw[blue, thick] (6.375,1) -- (7,1);  
+
+\draw[red, thick] (5.5,0) -- (6.375,0); 
+
+\draw[blue, thick] (5.5,1) -- (5.5,0);    
+\draw[blue, thick] (6.375,0) -- (6.375,1);  
+
+\end{axis}
+\end{tikzpicture}
+
+\section{Disponibilidade de um Data Center}
+
+\textbf{2 – O que significa disponibilidade de um Data Center?}  \\
+Disponibilidade de um Data Center refere-se ao tempo em que ele permanece operacional e acessível com os serviços rodando sem interrupções ou falhas.
+
+\textbf{3 – De qual infraestrutura um Data Center depende para a sua disponibilidade?}  \\
+A disponibilidade de um Data Center depende de diversos fatores, incluindo energia elétrica (tanto da concessionária quanto de nobreaks e geradores), climatização, rede, segurança, controle de acesso, além de hardware e software confiáveis.
+
+\textbf{4 – Cálculo do percentual de disponibilidade de um Data Center}  \\
+Deve-se considerar o espaçdo de um ano com 365 dias. Se o tempo total de indisponibilidade foi de 2 dias, então:
+\begin{align*}
+    D &= \left( \frac{365 - 2}{365} \right) \times 100 \\
+    &= \left( \frac{363}{365} \right) \times 100 \\
+    &\approx 99,45\%
+\end{align*}
+Portanto, a disponibilidade do Data Center foi aproximadamente \textbf{99,45\%}.
+
+\textbf{5 – Exemplo de sistema com redundância}  \\
+Um exemplo é um servidor de aplicação configurado em \textbf{cluster} proxmox com balanceamento de carga e alta disponibilidade, é configurado um sistema de armazenamento CEPH ou JBOD para permitir que todos os dados estejam sempre presentes e acessíveis a todos os servidores do cluster a todo momento. Caso um servidor falhe, outro assume automaticamente, garantindo continuidade no serviço.
+
+\textbf{6 – Cálculo de módulos de potência para nobreak}  \\
+A configuração \textbf{N+2} significa que, além dos módulos necessários (N), são adicionados dois módulos extras para redundância.  
+Cálculo:
+\begin{align*}
+    N &= \frac{100}{16} = 6,25
+\end{align*}
+Arredondando para cima: \textbf{7 módulos} são necessários para suprir a carga.  
+Com a redundância \textbf{N+2}, a configuração total será:
+\begin{align*}
+    7 + 2 = 9 \text{ módulos de 16 kW}
+\end{align*}
+
+\end{document}
+
