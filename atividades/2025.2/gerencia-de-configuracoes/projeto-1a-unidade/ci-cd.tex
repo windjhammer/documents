@@ -113,12 +113,12 @@ A startup do exemplo enfrenta dificuldades no processo de deploy manual, pois es
 
 Com o CD, todas as mudanças que passam pela \textbf{Integração Contínua} são automaticamente preparadas para implantação, eliminando o risco de erros humanos no deploy. Para essa startup, uma pipeline automatizada poderia seguir as seguintes etapas:  
 
-1. \textbf{Build e Testes Automatizados} – A cada novo \textit{commit}, o código é compilado e testado para garantir que está funcionando corretamente.  
-2. \textbf{Criação dos pacotes} – O software é empacotado (por exemplo, um container \textit{Docker}) para garantir consistência entre os ambientes.  
-3. \textbf{Implantação Automatizada} – O código é enviado para os servidores de produção automaticamente, eliminando a necessidade de deploy manual. Como por exemplo utilizando o \textbf{GitLab CI/CD}.  
-4. \textbf{Monitoramento e Rollback} – Após o deploy, ferramentas como \textit{Zabbix, Datadog, Grafana, Graylog e ELK Stack} podem monitorar o sistema em tempo real. Caso algum problema seja detectado, um rollback automático pode ser acionado.  
+1. \textbf{Build e Testes Automatizados} – A cada novo \textit{commit}, o código é compilado e testado para garantir que está funcionando corretamente.   \newline
+2. \textbf{Criação dos pacotes} – O software é empacotado (por exemplo, um container \textit{Docker}) para garantir consistência entre os ambientes.   \newline
+3. \textbf{Implantação Automatizada} – O código é enviado para os servidores de produção automaticamente, eliminando a necessidade de deploy manual. Como por exemplo utilizando o \textbf{GitLab CI/CD}.   \newline
+4. \textbf{Monitoramento e Rollback} – Após o deploy, ferramentas como \textit{Zabbix, Datadog, Grafana, Graylog e ELK Stack} podem monitorar o sistema em tempo real. Caso algum problema seja detectado, um \textit{rollback} automático pode ser acionado.   \newline
 
-Com a \textbf{Entrega Contínua}, a startup pode manter seu ciclo de lançamentos semanais sem instabilidades, garantindo que novas funcionalidades sejam entregues rapidamente e com menos chanbce de conter erros.  
+Com a implementação do \textbf{CD}, a startup pode manter seu ciclo de lançamentos semanais sem instabilidades, garantindo que novas funcionalidades sejam entregues rapidamente e com menos chanbce de conter erros.  
 
 
 \newpage{}
