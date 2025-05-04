@@ -1,0 +1,311 @@
+
+\documentclass[12pt]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[brazil]{babel}
+\usepackage{geometry}
+\usepackage{enumitem}
+\usepackage{array}
+\usepackage{titlesec}
+\geometry{a4paper, margin=2.5cm}
+\renewcommand{\arraystretch}{1.5}
+\titleformat{\section}{\bfseries\Large\centering}{}{0em}{}
+
+\begin{document}
+
+% INÍCIO DOS CASOS DE TESTE
+
+% Função auxiliar para gerar cada caso de teste
+% Basta copiar a estrutura abaixo e mudar os valores
+
+\newcommand{\casodeteste}[6]{
+\begin{center}
+ %   \textbf{\Large Caso de Teste}
+\end{center}
+
+\vspace{0.5cm}
+
+\begin{tabular}{|>{\bfseries}p{4cm}|p{10cm}|}
+    \hline
+    ID & #1 \\
+    \hline
+    Nome & #2 \\
+    \hline
+    Ambiente & #3 \\
+    \hline
+    Pré-Condições & #4 \\
+    \hline
+    Procedimento & 
+    \begin{itemize}[noitemsep,topsep=0pt]
+        #5
+    \end{itemize} \\
+    \hline
+    Pós-Condições & #6 \\
+    \hline
+\end{tabular}
+
+\vspace{1cm}
+}
+
+% AQUI COMEÇAM OS CASOS
+
+\casodeteste
+{CT001}
+{Verificar se a busca por palavras-chave retorna resultados relevantes.}
+{Barra de busca}
+{Acesso ao site G1 com conexão à internet.}
+{
+\item Acessar o site.
+\item Digitar "educação" na barra de busca.
+\item Pressionar Enter.
+}
+{Lista de notícias relacionadas ao tema educação.}
+
+\casodeteste
+{CT002}
+{Verificar se a homepage carrega corretamente.}
+{Página inicial}
+{Acesso ao site.}
+{
+\item Acessar o site.
+}
+{Página inicial com notícias atualizadas e layout carregado.}
+
+\casodeteste
+{CT003}
+{Testar a navegação entre categorias.}
+{Menu principal}
+{Página inicial carregada.}
+{
+\item Clicar em “Política”.
+}
+{Redirecionamento para a seção de política.}
+
+\casodeteste
+{CT004}
+{Verificar a exibição de vídeos.}
+{Player de vídeo}
+{Conexão estável com internet.}
+{
+\item Clicar em uma notícia com vídeo.
+\item Pressionar play.
+}
+{O vídeo deve iniciar sem travamentos.}
+
+\casodeteste
+{CT005}
+{Validar o carregamento da versão mobile.}
+{Responsividade}
+{Acessar via dispositivo móvel.}
+{
+\item Acessar o site via celular.
+}
+{Layout adaptado para o tamanho da tela.}
+
+\casodeteste
+{CT006}
+{Validar o funcionamento do botão de compartilhar.}
+{Compartilhamento de notícia}
+{Estar em uma notícia específica.}
+{
+\item Clicar no botão de compartilhar (WhatsApp, Facebook etc.).
+}
+{Exibição de opções de compartilhamento.}
+
+\casodeteste
+{CT007}
+{Verificar o funcionamento da rolagem infinita.}
+{Scroll automático}
+{Estar em seção com rolagem.}
+{
+\item Rolar a página até o final.
+}
+{Novas notícias são carregadas automaticamente.}
+
+\casodeteste
+{CT008}
+{Validar o tempo de resposta ao acessar uma notícia.}
+{Tempo de carregamento}
+{Internet estável.}
+{
+\item Clicar em uma notícia.
+}
+{Página carregada em menos de 3 segundos.}
+
+\casodeteste
+{CT009}
+{Verificar a atualização de notícias.}
+{Atualização em tempo real}
+{Estar na página inicial por um tempo.}
+{
+\item Aguardar 10 minutos.
+\item Atualizar a página.
+}
+{Exibição de novas notícias.}
+
+\casodeteste
+{CT010}
+{Verificar erro ao digitar URL inexistente.}
+{Tratamento de erro 404}
+{Navegador aberto.}
+{
+\item Acessar https://g1.globo.com/aaaaa.
+}
+{Página de erro 404 personalizada do G1.}
+
+\casodeteste
+{CT011}
+{Verificar se a navegação por notícias regionais funciona.}
+{Menu de regiões}
+{Página inicial aberta.}
+{
+\item Clicar em “São Paulo”.
+}
+{O site exibe apenas notícias relacionadas à região de São Paulo.}
+
+\casodeteste
+{CT012}
+{Testar o funcionamento da função de zoom do navegador.}
+{Acessibilidade visual}
+{Estar na visualização padrão.}
+{
+\item Aplicar zoom (Ctrl + / Ctrl -).
+}
+{O layout permanece funcional e o conteúdo visível.}
+
+\casodeteste
+{CT013}
+{Verificar se os links das redes sociais funcionam.}
+{Ícones de redes sociais no rodapé}
+{Rodapé visível.}
+{
+\item Clicar em “Facebook”.
+}
+{Abre a página oficial do G1 no Facebook.}
+
+\casodeteste
+{CT014}
+{Detectar links quebrados.}
+{Links internos}
+{Página carregada.}
+{
+\item Clicar em 5 notícias aleatórias.
+}
+{Todos os links devem direcionar corretamente.}
+
+\casodeteste
+{CT015}
+{Testar se notificações push são solicitadas.}
+{Notificações}
+{Acessar com navegador que permita notificações.}
+{
+\item Entrar no site e aguardar alguns segundos.
+}
+{Aparece solicitação para ativar notificações.}
+
+\casodeteste
+{CT016}
+{Verificar se há link para a política de privacidade.}
+{Rodapé do site}
+{Página carregada.}
+{
+\item Rolar até o fim da página.
+\item Clicar em “Política de Privacidade”.
+}
+{Usuário é redirecionado para a página com a política.}
+
+\casodeteste
+{CT017}
+{Testar busca por data.}
+{Filtro de data (se houver)}
+{Página de busca aberta.}
+{
+\item Procurar notícias do dia 01/01/2024.
+}
+{Retornar somente notícias dessa data.}
+
+\casodeteste
+{CT018}
+{Validar navegação por tags de temas.}
+{Tags de artigos}
+{Acessar uma notícia.}
+{
+\item Clicar em uma tag como “Educação”.
+}
+{Mostrar notícias relacionadas à tag.}
+
+\casodeteste
+{CT019}
+{Verificar a exibição correta da seção de esportes.}
+{Seção “Esporte”}
+{Página inicial carregada.}
+{
+\item Clicar em “Esporte” no menu.
+}
+{Listagem de notícias esportivas atualizadas.}
+
+\casodeteste
+{CT020}
+{Testar o carregamento de galerias de fotos.}
+{Conteúdo multimídia}
+{Galeria acessível.}
+{
+\item Clicar em uma galeria.
+\item Navegar pelas imagens.
+}
+{Todas as imagens carregam corretamente.}
+
+\casodeteste
+{CT021}
+{Verificar se a funcionalidade de comentários está ativa (caso exista).}
+{Comentários de usuários}
+{Estar logado (caso necessário).}
+{
+\item Rolar até a área de comentários de uma notícia.
+}
+{Permitir escrever e enviar comentários.}
+
+\casodeteste
+{CT022}
+{Validar funcionamento do botão “voltar ao topo”.}
+{Navegação facilitada}
+{Página longa.}
+{
+\item Rolar até o final da página.
+\item Clicar no botão “↑”.
+}
+{A página sobe automaticamente até o topo.}
+
+\casodeteste
+{CT023}
+{Verificar a integração com login de serviços da Globo (Globoplay/G1 Play).}
+{Autenticação}
+{Possuir conta ativa.}
+{
+\item Clicar em “Entrar”.
+\item Informar e-mail e senha.
+}
+{O login é realizado com sucesso e o nome do usuário aparece no topo.}
+
+\casodeteste
+{CT024}
+{Testar busca por nome de jornalista.}
+{Campo de busca}
+{Saber o nome de um jornalista.}
+{
+\item Digitar “Renata Lo Prete” na busca.
+}
+{Notícias atribuídas à jornalista aparecem na busca.}
+
+\casodeteste
+{CT025}
+{Validar se há formulário de feedback ou contato.}
+{Contato/atendimento ao leitor}
+{Página inicial carregada.}
+{
+\item Rolar até o rodapé.
+\item Clicar em “Fale conosco” ou similar.
+}
+{Aparece uma página de contato ou formulário para envio de mensagem.}
+
+% FIM DO DOCUMENTO
+\end{document}

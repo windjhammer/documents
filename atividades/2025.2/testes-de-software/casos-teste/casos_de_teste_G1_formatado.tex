@@ -1,0 +1,271 @@
+
+\documentclass[12pt]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[brazil]{babel}
+\usepackage{geometry}
+\usepackage{enumitem}
+\usepackage{array}
+\geometry{a4paper, margin=2.5cm}
+\title{Projeto Teste de Software - G1}
+\author{Allyson Rubens, Breno Fernandes, João Vittor, Luiz Felipe, Tulio Montenegro\\
+Faculdade UNINASSAU Olinda}
+\date{2025}
+
+\begin{document}
+
+\maketitle
+
+\section*{Introdução}
+
+Este projeto tem como principal objetivo a aplicação prática dos conceitos teóricos estudados na disciplina de Teste de Software, por meio do desenvolvimento e execução de casos de teste aplicados a um sistema web real. Para essa atividade, o site escolhido foi o portal de notícias G1 (\texttt{https://g1.globo.com}), um dos maiores e mais acessados portais jornalísticos do Brasil, pertencente ao Grupo Globo.
+
+A escolha do G1 não foi aleatória, sendo motivada por sua relevância no cenário nacional e pela variedade de funcionalidades oferecidas, que vão desde a exibição de notícias em tempo real até recursos multimídia, como vídeos, reportagens especiais, buscas temáticas e organização por editorias.
+
+O portal G1 destaca-se por sua estrutura intuitiva e design responsivo, o que o torna acessível a diferentes tipos de dispositivos e perfis de usuários. Além disso, seu compromisso com a atualização constante e a confiabilidade das informações publicadas faz dele um excelente candidato para a realização de testes que envolvam critérios como usabilidade, performance e segurança.
+
+A análise de um sistema com tais características permite não apenas a criação de casos de teste robustos, como também proporciona uma compreensão mais ampla da importância de garantir a qualidade de sistemas voltados para um grande volume de acessos simultâneos.
+
+No contexto deste trabalho, buscou-se simular situações reais de uso, com o intuito de validar o funcionamento adequado das principais funcionalidades do site. Foram analisados elementos como o comportamento da barra de busca, a navegação por categorias, a reprodução de vídeos, a atualização de notícias em tempo real e a experiência do usuário de forma geral. Cada integrante do grupo ficou responsável por desenvolver cinco casos de teste, totalizando 25 cenários distintos.
+
+Esses testes foram documentados seguindo um modelo estruturado que contempla campos como identificação, objetivo, pré-condições, passos para execução e o resultado esperado.
+
+\section*{Casos de Teste}
+\begin{center}
+    \textbf{\Large Caso de Teste}
+\end{center}
+
+\vspace{0.5cm}
+
+\renewcommand{\arraystretch}{1.5}
+\begin{tabular}{|>{\bfseries}p{4cm}|p{10cm}|}
+    \hline
+    ID & CT001 \\
+    \hline
+    Nome & Verificar se a busca por palavras-chave retorna resultados relevantes. \\
+    \hline
+    Ambiente & Barra de busca. \\
+    \hline
+    Pré-Condições & Acesso ao site G1 com conexão à internet. \\
+    \hline
+    Procedimento & 
+    \begin{itemize}
+\item Acessar o site.
+\item Digitar "educação" na barra de busca.
+\item Pressionar Enter.
+\item Resultado Esperado: Lista de notícias relacionadas ao tema educação.
+\item 2. ID: CT002
+\item Objetivo: Verificar se a homepage carrega corretamente.
+\item Funcionalidade Testada: Página inicial.
+\item Pré-condições: Acesso ao site.
+\item Passos:
+\item 1. Acessar o site.
+\item Resultado Esperado: Página inicial com notícias atualizadas e layout carregado.
+\item 3. ID: CT003
+\item Objetivo: Testar a navegação entre categorias.
+\item Funcionalidade Testada: Menu principal.
+\item Pré-condições: Página inicial carregada.
+\item Passos:
+\item 1. Clicar em “Política”.
+\item Resultado Esperado: Redirecionamento para a seção de política.
+\item 4. ID: CT004
+\item Objetivo: Verificar a exibição de vídeos.
+\item Funcionalidade Testada: Player de vídeo.
+\item Pré-condições: Conexão estável com internet.
+\item Passos:
+\item Clicar em uma notícia com vídeo.
+\item Pressionar play.
+\item Resultado Esperado: O vídeo deve iniciar sem travamentos.
+\item 5. ID: CT005
+\item Objetivo: Validar o carregamento da versão mobile.
+\item Funcionalidade Testada: Responsividade.
+\item Pré-condições: Acessar via dispositivo móvel.
+\item Passos:
+\item 1. Acessar o site via celular.
+\item Resultado Esperado: Layout adaptado para o tamanho da tela.
+\item 6. ID: CT006
+\item Objetivo: Validar o funcionamento do botão de compartilhar.
+\item Funcionalidade Testada: Compartilhamento de notícia.
+\item Pré-condições: Estar em uma notícia específica.
+\item Passos:
+\item 1. Clicar no botão de compartilhar (WhatsApp, Facebook etc.).
+\item Resultado Esperado: Exibição de opções de compartilhamento.
+\item 7. ID: CT007
+\item Objetivo: Verificar o funcionamento da rolagem infinita.
+\item Funcionalidade Testada: Scroll automático.
+\item Pré-condições: Estar em seção com rolagem.
+\item Passos:
+\item 1. Rolar a página até o final.
+\item Resultado Esperado: Novas notícias são carregadas automaticamente.
+\item 8. ID: CT008
+\item Objetivo: Validar o tempo de resposta ao acessar uma notícia.
+\item Funcionalidade Testada: Tempo de carregamento.
+\item Pré-condições: Internet estável.
+\item Passos:
+\item 1. Clicar em uma notícia.
+\item Resultado Esperado: Página carregada em menos de 3 segundos.
+\item 9. ID: CT009
+\item Objetivo: Verificar a atualização de notícias.
+\item Funcionalidade Testada: Atualização em tempo real.
+\item Pré-condições: Estar na página inicial por um tempo.
+\item Passos:
+\item Aguardar 10 minutos.
+\item Atualizar a página.
+\item Resultado Esperado: Exibição de novas notícias.
+\item 10. ID: CT010
+\item Objetivo: Verificar erro ao digitar URL inexistente.
+\item Funcionalidade Testada: Tratamento de erro 404.
+\item Pré-condições: Navegador aberto.
+\item Passos:
+\item 1. Acessar https://g1.globo.com/aaaaa.
+\item Resultado Esperado: Página de erro 404 personalizada do G1.
+\item 11. ID: CT011
+\item Objetivo: Verificar se a navegação por notícias regionais funciona.
+\item Funcionalidade Testada: Menu de regiões.
+\item Pré-condições: Página inicial aberta.
+\item Passos:
+\item 1. Clicar em “São Paulo”.
+    \end{itemize} \\
+    \hline
+    Pós-Condições & O site exibe apenas notícias relacionadas à região de São Paulo. 12. \\
+    \hline
+\end{tabular}
+
+\vspace{1cm}
+
+\begin{center}
+    \textbf{\Large Caso de Teste}
+\end{center}
+
+\vspace{0.5cm}
+
+\renewcommand{\arraystretch}{1.5}
+\begin{tabular}{|>{\bfseries}p{4cm}|p{10cm}|}
+    \hline
+    ID & CT012 \\
+    \hline
+    Nome & Testar o funcionamento da função de zoom do navegador. \\
+    \hline
+    Ambiente & Acessibilidade visual. \\
+    \hline
+    Pré-Condições & Estar na visualização padrão. \\
+    \hline
+    Procedimento & 
+    \begin{itemize}
+\item 1. Aplicar zoom (Ctrl + / Ctrl -).
+\item Resultado Esperado: O layout permanece funcional e o conteúdo visível.
+\item 13. ID: CT013
+\item Objetivo: Verificar se os links das redes sociais funcionam.
+\item Funcionalidade Testada: Ícones de redes sociais no rodapé.
+\item Pré-condições: Rodapé visível.
+\item Passos:
+\item 1. Clicar em “Facebook”.
+\item Resultado Esperado: Abre a página oficial do G1 no Facebook.
+\item 14. ID: CT014
+\item Objetivo: Detectar links quebrados.
+\item Funcionalidade Testada: Links internos.
+\item Pré-condições: Página carregada.
+\item Passos:
+\item 1. Clicar em 5 notícias aleatórias.
+\item Resultado Esperado: Todos os links devem direcionar corretamente.
+\item 15. ID: CT015
+\item Objetivo: Testar se notificações push são solicitadas.
+\item Funcionalidade Testada: Notificações.
+\item Pré-condições: Acessar com navegador que permita notificações.
+\item Passos:
+\item 1. Entrar no site e aguardar alguns segundos.
+\item Resultado Esperado: Aparece solicitação para ativar notificações.
+\item 16. ID: CT016
+\item Objetivo: Verificar se há link para a política de privacidade.
+\item Funcionalidade Testada: Rodapé do site.
+\item Pré-condições: Página carregada.
+\item Passos:
+\item Rolar até o fim da página.
+\item Clicar em “Política de Privacidade”.
+\item Resultado Esperado: Usuário é redirecionado para a página com a política.
+\item 17. ID: CT017
+\item Objetivo: Testar busca por data.
+\item Funcionalidade Testada: Filtro de data (se houver).
+\item Pré-condições: Página de busca aberta.
+\item Passos:
+\item 1. Procurar notícias do dia 01/01/2024.
+\item Resultado Esperado: Retornar somente notícias dessa data.
+\item 18. ID: CT018
+\item Objetivo: Validar navegação por tags de temas.
+\item Funcionalidade Testada: Tags de artigos.
+\item Pré-condições: Acessar uma notícia.
+\item Passos:
+\item 1. Clicar em uma tag como “Educação”.
+\item Resultado Esperado: Mostrar notícias relacionadas à tag.
+\item 19. ID: CT019
+\item Objetivo: Verificar a exibição correta da seção de esportes.
+\item Funcionalidade Testada: Seção “Esporte”.
+\item Pré-condições: Página inicial carregada.
+\item Passos:
+\item 1. Clicar em “Esporte” no menu.
+\item Resultado Esperado: Listagem de notícias esportivas atualizadas.
+\item 20. ID: CT020
+\item Objetivo: Testar o carregamento de galerias de fotos.
+\item Funcionalidade Testada: Conteúdo multimídia.
+\item Pré-condições: Galeria acessível.
+\item Passos:
+\item Clicar em uma galeria.
+\item Navegar pelas imagens.
+\item Resultado Esperado: Todas as imagens carregam corretamente.
+\item 21. ID: CT021
+\item Objetivo: Verificar se a funcionalidade de comentários está ativa (caso exista).
+\item Funcionalidade Testada: Comentários de usuários.
+\item Pré-condições: Estar logado (caso necessário).
+\item Passos:
+\item 1. Rolar até a área de comentários de uma notícia.
+\item Resultado Esperado: Permitir escrever e enviar comentários.
+\item 22. ID: CT022
+\item Objetivo: Validar funcionamento do botão “voltar ao topo”.
+\item Funcionalidade Testada: Navegação facilitada.
+\item Pré-condições: Página longa.
+\item Passos:
+\item Rolar até o final da página.
+\item Clicar no botão “↑”.
+\item Resultado Esperado: A página sobe automaticamente até o topo.
+\item 23. ID: CT023
+\item Objetivo: Verificar a integração com login de serviços da Globo (Globoplay/G1 Play).
+\item Funcionalidade Testada: Autenticação.
+\item Pré-condições: Possuir conta ativa.
+\item Passos:
+\item Clicar em “Entrar”.
+\item Informar e-mail e senha.
+    \end{itemize} \\
+    \hline
+    Pós-Condições & O login é realizado com sucesso e o nome do usuário aparece no topo. 24. \\
+    \hline
+\end{tabular}
+
+\vspace{1cm}
+
+\begin{center}
+    \textbf{\Large Caso de Teste}
+\end{center}
+
+\vspace{0.5cm}
+
+\renewcommand{\arraystretch}{1.5}
+\begin{tabular}{|>{\bfseries}p{4cm}|p{10cm}|}
+    \hline
+    ID & CT024 \\
+    \hline
+    Nome & Testar busca por nome de jornalista. \\
+    \hline
+    Ambiente & Campo de busca. \\
+    \hline
+    Pré-Condições & Saber o nome de um jornalista. \\
+    \hline
+    Procedimento & 
+    \begin{itemize}
+\item 1. Digitar “Renata Lo Prete” na busca.
+    \end{itemize} \\
+    \hline
+    Pós-Condições & Notícias atribuídas à jornalista aparecem na busca. 25. \\
+    \hline
+\end{tabular}
+
+\vspace{1cm}
+\end{document}
