@@ -1,0 +1,112 @@
+\documentclass[12pt, a4paper]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[portuguese]{babel}
+\usepackage{graphicx}
+\usepackage{hyperref}
+\usepackage{listings}
+\usepackage{xcolor}
+\usepackage{geometry}
+
+\geometry{a4paper, left=3cm, right=2cm, top=3cm, bottom=2cm}
+
+\title{Relatório de Implementação de Sistema de Alta Disponibilidade com Kubernetes, Prometheus e Grafana}
+\author{Breno Fernandes - 01169313}
+\date{\today}
+
+\lstset{
+    basicstyle=\ttfamily\small,
+    breaklines=true,
+    frame=single,
+    numbers=left,
+    keywordstyle=\color{blue},
+    commentstyle=\color{green!40!black},
+    stringstyle=\color{red},
+}
+
+\begin{document}
+
+\maketitle
+
+\begin{abstract}
+Este relatório documenta a implementação de um sistema de streaming de vídeo com alta disponibilidade utilizando Kubernetes no Google Cloud Platform (GCP), com monitoramento via Prometheus e Grafana. O projeto incluiu configuração de clusters, implantação de aplicações e resolução de desafios técnicos.
+\end{abstract}
+
+\section{Introdução}
+O objetivo foi demonstrar funcionalidades de alta disponibilidade através de:
+\begin{itemize}
+    \item Cluster Kubernetes (GKE)
+    \item Balanceamento de carga
+    \item Monitoramento com Prometheus + Grafana
+    \item Recuperação automática de falhas
+\end{itemize}
+
+\section{Arquitetura do Sistema}
+\begin{figure}[h]
+    \centering
+ %   \includegraphics[width=0.8\textwidth]{arquitetura.png}
+    \caption{Diagrama da arquitetura implementada}
+    \label{fig:arquitetura}
+\end{figure}
+
+\section{Metodologia}
+
+\subsection{Configuração Inicial}
+\begin{itemize}
+    \item Hospedagem do vídeo no Google Cloud Storage
+    \item Aplicação web em Flask para streaming
+    \item Containerização com Docker
+\end{itemize}
+
+\subsection{Kubernetes}
+\begin{lstlisting}[language=bash,caption=Comandos de implantação no GKE]
+gcloud container clusters create streaming-cluster \
+  --num-nodes=3 \
+  --machine-type=e2-medium
+\end{lstlisting}
+
+\subsection{Monitoramento}
+\begin{itemize}
+    \item Instalação do Prometheus via Helm:
+\begin{lstlisting}[language=bash]
+helm install prometheus prometheus-community/prometheus
+\end{lstlisting}
+
+    \item Configuração do Grafana:
+\begin{lstlisting}[language=bash]
+helm install grafana grafana/grafana
+kubectl expose service grafana --type=LoadBalancer
+\end{lstlisting}
+\end{itemize}
+
+\section{Resultados e Desafios}
+
+\subsection{Métricas de Desempenho}
+\begin{figure}[h]
+    \centering
+%    \includegraphics[width=0.9\textwidth]{grafana_dashboard.png}
+    \caption{Dashboard no Grafana com métricas do Kubernetes}
+    \label{fig:dashboard}
+\end{figure}
+
+\subsection{Problemas Encontrados}
+\begin{itemize}
+    \item \textbf{Pods em estado Pending}: Resolvido ajustando quotas no GCP
+    \item \textbf{Erros de conexão Prometheus-Grafana}: Corrigido via ajuste de ports
+    \item \textbf{Configuração de HA}: Testes de failover com deleção de pods
+\end{itemize}
+
+\section{Conclusões}
+O sistema demonstrou:
+\begin{itemize}
+    \item Recuperação automática em 15-30 segundos
+    \item Balanceamento eficiente de carga
+    \item Monitoramento em tempo real eficaz
+\end{itemize}
+
+\subsection*{Referências}
+\begin{itemize}
+    \item Documentação GKE: \url{https://cloud.google.com/kubernetes-engine}
+    \item Helm Charts: \url{https://artifacthub.io}
+\end{itemize}
+
+\end{document}
