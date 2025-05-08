@@ -1,0 +1,24 @@
+\frametitle{Arquitetura do Projeto}
+\begin{columns}
+        \column{0.6\textwidth}
+        \begin{lstlisting}
+# Deployment
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: nginx-deployment
+spec:
+  replicas: 1
+  template:
+    spec:
+      containers:
+      - name: nginx
+        image: nginx:latest
+        resources:
+          requests:
+            cpu: "100m"
+        \end{lstlisting}
+
+        \column{0.4\textwidth}
+        \includegraphics[width=\textwidth]{hpa-diagram.png}
+    \end{columns}
