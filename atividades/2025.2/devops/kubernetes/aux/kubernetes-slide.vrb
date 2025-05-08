@@ -20,5 +20,4 @@ spec:
         \end{lstlisting}
 
         \column{0.4\textwidth}
-        \includegraphics[width=\textwidth]{hpa-diagram.png}
     \end{columns}
