@@ -1,0 +1,16 @@
+minikube start
+
+minikube addons enable metrics-server
+
+kubectl apply -f nginx-deployment.yaml
+
+kubectl expose deployment nginx-deployment --type=LoadBalancer --port=80
+
+# Criar o autoscaler horizontal baseado em CPU
+kubectl autoscale deployment nginx-deployment --cpu-percent=50 --min=1 --max=5
+
+minikube service nginx-deployment
+
+kubectl get pods
+
+kubectl get hpa

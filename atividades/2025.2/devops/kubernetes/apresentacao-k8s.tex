@@ -1,16 +1,11 @@
 \documentclass{beamer}
-\usetheme{metropolis}
+\usetheme{Madrid}
 \usepackage[utf8]{inputenc}
 \usepackage[portuguese]{babel}
 \usepackage{graphicx}
 \usepackage{listings}
 \usepackage{xcolor}
 \usepackage{hyperref}
-\usepackage{tikz}
-\usetikzlibrary{shapes.geometric, arrows.meta, positioning}
-\tikzstyle{block} = [rectangle, rounded corners, minimum width=2.5cm, minimum height=1cm, text centered, draw=black, fill=blue!20]
-\tikzstyle{arrow} = [thick,->,>=stealth]
-
 
 \title{Kubernetes e Aplicações Escalonáveis}
 \subtitle{Projeto Prático com Minikube}
@@ -36,7 +31,6 @@
     \includegraphics[width=1.5cm]{Kubernetes-Logo.png}\\[0.5cm]
     \titlepage
 \end{frame}
-
 
 \begin{frame}{Sumário}
     \tableofcontents
@@ -125,12 +119,20 @@ spec:
     \end{columns}
 \end{frame}
 
-% --------------------- DEMONSTRAÇÃO ---------------------
+% --------------------- DEMONSTRAÇÃO -----------------
 \section{Demonstração e Resultados}
-
-\begin{frame}{Comandos Principais}
+\begin{frame}[fragile]{Comandos Principais}
     \begin{exampleblock}{Configuração Inicial}
-        \lstinputlisting{commands.txt}
+        \begin{lstlisting}[basicstyle=\scriptsize]
+        minikube start
+        minikube addons enable metrics-server
+        kubectl apply -f nginx-deployment.yaml
+        kubectl expose deployment nginx-deployment --type=LoadBalancer --port=80
+        kubectl autoscale deployment nginx-deployment --cpu-percent=50 --min=1 --max=5
+        minikube service nginx-deployment
+        kubectl get pods
+        kubectl get hpa
+        \end{lstlisting}
     \end{exampleblock}
 \end{frame}
 
@@ -141,13 +143,9 @@ spec:
             \item Escalonamento automático ativado
             \item Load Balancer distribuindo tráfego
             \item Métricas coletadas com sucesso
-            \item Latência reduzida em 40\% (exemplo)
+            \item Redução na latência comparado ao overhead de rodar em um cluster de VMs
         \end{itemize}
-
-        \column{0.5\textwidth}
-        \centering
-        \includegraphics[width=0.9\textwidth]{metrics-graph.png}
-    \end{columns}
+   \end{columns}
 \end{frame}
 
 % --------------------- DESAFIOS ----------------------
@@ -163,16 +161,16 @@ spec:
 
         \column{0.5\textwidth}
         \centering
-        \includegraphics[width=\textwidth]{k8s-iceberg.png}
-        \\\tiny Fonte: Adaptado de conteúdos da comunidade Kubernetes
+        \includegraphics[width=\textwidth]{k8s-iceberg.png}\\
+        \tiny Fonte: Adaptado de conteúdos da comunidade Kubernetes
     \end{columns}
 \end{frame}
+
 % --------------------- CONCLUSÃO ---------------------
 \section{Conclusão}
 
 \begin{frame}{O que aprendemos?}
     \begin{itemize}
-        \item Importância do Metrics Server
         \item Configuração cuidadosa de recursos
         \item Padrões de resiliência em cloud
         \item Vantagens da orquestração de containers
@@ -183,7 +181,7 @@ spec:
     \begin{itemize}
         \item Implementar auto-scaling baseado em métricas customizadas
         \item Adicionar monitoramento com Prometheus/Grafana
-        \item Testar em cluster multi-node
+        \item Funcionamento em cluster multi-node
         \item Implementar CI/CD para deployments
     \end{itemize}
 \end{frame}
@@ -192,7 +190,8 @@ spec:
     \begin{itemize}
         \item Documentação oficial Kubernetes: \url{https://kubernetes.io}
         \item Minikube Documentation: \url{https://minikube.sigs.k8s.io}
-        \item Livro: "Kubernetes in Action" - Marko Lukša
+        \item Artigo: Guide to bare metal Kubernetes: Everything you need to know. 
+         \line \url{https://medium.com/@zemim/guide-to-bare-metal-kubernetes-everything-you-need-to-know-e15aedf013a3}
     \end{itemize}
     \centering
     \vspace{1cm}
